@@ -1,7 +1,10 @@
-import { GlobalStyle } from './GlobalStyles';
-import { Section } from './Section/Section';
 import { Component } from "react";
-import { Box } from './Box';
+
+import { GlobalStyle } from './GlobalStyles';
+import {Statistics} from './Statistics/Statistics'
+import { Section } from './Section/Section';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import {Notification} from './Notification/Notification'
 
 export class App extends Component {
   state = {
@@ -19,9 +22,6 @@ export class App extends Component {
       this.setState(prevState => ({ bad: prevState.bad + 1 }))
     }
   };
-
-
-  
 
   render() {
     const { good, neutral, bad } = this.state;
@@ -43,20 +43,16 @@ export class App extends Component {
     countPositiveFeedbackPercentage();
     return (
       <>
-        <Section title="Please leave feedback"/>
-        <Box>
-          <button onClick={this.onBtnClick}>Good</button>
-          <button onClick={this.onBtnClick}>Neutral</button>
-          <button onClick={this.onBtnClick}>Bad</button>
-        </Box>
-          <Section title="Statistics" />
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bed: {bad}</p>
-          <p>Total: {totalValue}</p>
-          <p>Positive feedback: {positiveFeedback}%</p>
-
-
+        <Section title="Please leave feedback">
+          <FeedbackOptions onLeaveFeedback={this.onBtnClick}/>
+        </Section>
+      
+        <Section title="Statistics">
+          {totalValue === 0 ? (<Notification messege="There is no feedback" />) : (
+            <Statistics good={good} neutral={neutral} bad={bad} total={totalValue} positivePercentage={positiveFeedback} />
+          )} 
+        </Section>
+        
         <GlobalStyle/>
       </>
     );

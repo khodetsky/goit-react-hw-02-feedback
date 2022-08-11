@@ -1,12 +1,21 @@
-import { Box } from 'components/Box';
+import { Box } from '../Box';
 import PropTypes from 'prop-types';
-import { Component } from "react";
-import { Box } from './Box';
+import { FeedbackBtn } from './FeedbackOptions.styled'
 
-// export class FeedbackOptions extends Component {
-//     render() {
+export const FeedbackOptions = ({ onLeaveFeedback }) => {
+    return (
+        <Box
+            display='inline-flex'
+            gridGap={4}
+            ml={5}
+        >
+            <FeedbackBtn onClick={onLeaveFeedback}>Good</FeedbackBtn>
+            <FeedbackBtn onClick={onLeaveFeedback}>Neutral</FeedbackBtn>
+            <FeedbackBtn onClick={onLeaveFeedback}>Bad</FeedbackBtn>
+        </Box>
+    )
+};
 
-//         return (
-//         )
-//     }
-// }
+FeedbackOptions.propTypes = {
+    nLeaveFeedback: PropTypes.elementType.isRequired,
+}
